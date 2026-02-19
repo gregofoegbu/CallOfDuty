@@ -16,9 +16,10 @@ def detect_arrows_with_info(image):
 
     kernel = np.ones((3, 3), np.uint8)
 
-    dilated_red = cv2.dilate(mask_red, kernel, iterations=2)
-    dilated_blue = cv2.dilate(mask_blue, kernel, iterations=2)
-
+    dilated_red = cv2.dilate(mask_red, kernel, iterations=1)
+    dilated_blue = cv2.dilate(mask_blue, kernel, iterations=1)
+    cv2.imshow("Red Dilated - Raw", dilated_red)
+    cv2.imshow("Blue Dilated - Raw", dilated_blue)
     output = image.copy()
 
     # Detect arrows for both masks and collect info
@@ -55,7 +56,7 @@ def find_arrows_and_record(mask, output, color_label, box_color):
                 
                 # Draw box and label
                 cv2.rectangle(output, (x, y), (x + w, y + h), box_color, 2)
-                cv2.putText(output, f"{color_label} {corners} area: {area}", (x, y - 5),
+                cv2.putText(output, f"{color_label} {corners}", (x, y - 5),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, box_color, 1)
 
                 # Calculate center
@@ -73,9 +74,9 @@ def find_arrows_and_record(mask, output, color_label, box_color):
     return detections
 
 
-map_x, map_y, map_width, map_height = 30, 580, 420, 280
+map_x, map_y, map_width, map_height = 30, 535, 420, 280
 
-cap = cv2.VideoCapture('SNDClip.mov')   # or video filename
+cap = cv2.VideoCapture('../../vods/VOD-2025-11-16.mov')
 
 if not cap.isOpened():
     print("Error opening video")
