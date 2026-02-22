@@ -1,1 +1,6 @@
 *.mov
+venv/
+.venv/
+*.webm
+__pycache__/
+*.pyc
