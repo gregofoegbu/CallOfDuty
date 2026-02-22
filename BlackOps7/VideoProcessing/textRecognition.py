@@ -1,3 +1,5 @@
+import os
+import utils
 import cv2
 import easyocr
 import matplotlib.pyplot as plt
@@ -6,7 +8,7 @@ import imagesplitter
 import json
 import getPlayers
 
-image_path = 'TestImages/CodHDFullScreen.png'
+image_path = 'TestImages/sample_54s.jpg'
 output_file = 'output.txt'
 
 img = cv2.imread(image_path);
@@ -21,6 +23,8 @@ text = reader.readtext(killfeed);
 #         f.write(line)
 
 # print("Text written to", output_file)
+kill_relations = utils.get_killfeed_relations(text)
+print(kill_relations)
 
 for t in text:
     bbox, _text, score = t
@@ -35,10 +39,9 @@ plt.show()
 #     img_region = imagesplitter.getimgregion(img, bbox)
 #     imagesplitter.show_processing_stages(img_region, title)
 
-
+    
 # plt.show()
 
 # players_dict = getPlayers.get_players(img)
 # with open("players.json", "w") as f:
 #     json.dump(players_dict, f, indent=4)
-

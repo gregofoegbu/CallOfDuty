@@ -5,13 +5,12 @@ import imagesplitter
 
 allowList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-def get_players(img):
+def get_players(img, reader):
     t1_name_str: str
     t2_name_str: str
     players_team1 = []
     players_team2 = []
     
-    reader = easyocr.Reader(['en'], gpu=False)
     team_one_name_img = imagesplitter.getimgregion(img, roi.team_one_name_bbox)
     team_two_name_img = imagesplitter.getimgregion(img, roi.team_two_name_bbox)
     team_one_players_img = imagesplitter.getimgregion(img, roi.players_team_one)
